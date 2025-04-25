@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
-import { Todo } from '@/lib/data';
+import { Todo } from '@/lib/db';
 
 type TodoContextType = {
     todos: Todo[];

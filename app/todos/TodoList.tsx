@@ -1,34 +1,29 @@
 'use client';
 import { useState, useTransition, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTodos } from './Context';
 import * as actions from './actions';
 
 export default function TodoList() {
-    const router = useRouter();
     const { todos, setTodos } = useTodos();
     const [title, setTitle]   = useState('');
     const [isPending, start]  = useTransition();
 
-    async function onSubmit(e: FormEvent) {
+    function onSubmit(e: FormEvent) {
         e.preventDefault();
         const value = title;
         setTitle('');
 
-        setTodos(prev => [...prev, { id: Date.now(), title: value, done: false }]);
+        const optimistic = { id: Date.now(), title: value, done: false };
+        setTodos(prev => [...prev, optimistic]);
 
-        start(async () => {
-            await actions.createTodo(value);
-            router.refresh();
-        });
+        start(() => actions.createTodo(optimistic));
     }
 
     function onToggle(id: number) {
-        setTodos(prev => prev.map(t => (t.id === id ? { ...t, done: !t.done } : t)));
-        start(async () => {
-            await actions.switchTodo(id);
-            router.refresh();
-        });
+        setTodos(prev =>
+            prev.map(t => (t.id === id ? { ...t, done: !t.done } : t)),
+        );
+        start(() => actions.switchTodo(id));
     }
 
     return (

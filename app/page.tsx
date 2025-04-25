@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import { getTodos } from '@/lib/data';
+import { getTodos } from '@/lib/db';
 import TodoList from './todos/TodoList';
 import { TodoProvider } from './todos/Context';
 import Stats from './todos/Stats';
@@ -12,11 +11,7 @@ export default async function TodoPage() {
     return (
         <section className="max-w-xl mx-auto p-8">
             <h1 className="text-2xl font-bold mb-6">RSC + Actions + Suspense</h1>
-
-            <Suspense fallback={<p className="mb-8">⌛️ Считаем статистику…</p>}>
-                <Stats key={todos.length} />
-            </Suspense>
-
+            <Stats key={todos.length} />
             <TodoProvider initial={todos}>
                 <TodoList />
             </TodoProvider>
