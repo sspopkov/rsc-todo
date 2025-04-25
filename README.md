@@ -8,6 +8,7 @@
 - Server Actions
 - Оптимистичные обновления
 - Управление состоянием
+- Работа с JSON File DB
 
 ▎✨ Особенности
 
@@ -30,16 +31,22 @@
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-▎📦 Структура проекта
+<pre><code>📦 Структура проекта
 
-📂 project/
+📂 app/
 │
-├── 📄 actions.ts        # Серверные действия
-├── 📄 Context.tsx       # Контекст управления todo
-├── 📄 TodoList.tsx      # Список задач
-├── 📄 Stats.tsx         # Компонент статистики
-├── 📄 Page.tsx          # Основная страница
-└── 📄 db.ts             # Управление данными
+├── 📄 page.tsx          # Основная страница приложения
+│
+├── 📂 todos/            # Всё, что связано с todo-функциональностью
+│   ├── 📄 actions.ts    # Серверные действия для todo
+│   ├── 📄 Context.tsx   # Контекст управления todo
+│   ├── 📄 TodoList.tsx  # Компонент списка задач
+│   └── 📄 Stats.tsx     # Компонент статистики
+│
+└── 📂 lib/              # Общие библиотечные файлы
+    └── 📄 db.ts         # Управление данными
+</code></pre>
+
 
 ▎🚦 Основные функции
 
@@ -51,10 +58,10 @@
 ▎🔧 Установка и запуск
 
 # Клонирование репозитория
-git clone https://github.com/your-username/advanced-todo.git
+git clone https://github.com/sspopkov/rsc-todo.git
 
 # Переход в директорию проекта
-cd advanced-todo
+cd rsc-todo
 
 # Установка зависимостей
 npm install
